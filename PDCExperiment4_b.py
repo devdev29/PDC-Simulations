@@ -35,13 +35,38 @@ for i in np.arange(0,8,2):
                 qpsk.append(c_01[100*i+j])
 
         else:
-            if(interpolated_bits[i+100]==0):
+            if(interpolated_bits[i*100+100]==0):
                 qpsk.append(c_10[100*i+j])
             else:
                 qpsk.append(c_11[100*i+j])
 
-        
-fig,axs=plt.subplots(6)
+demodulated_bits=[]
+
+for i in range(4):
+    if  (qpsk[i*100+1]==c_00[i*100+1]):
+        for j in range(200):
+            demodulated_bits.append(0)
+    elif(qpsk[i*100+1]==c_01[i*100+1]):
+        for j in range(200):
+            if(j<=99):
+                demodulated_bits.append(0)
+            else:
+                demodulated_bits.append(1)
+    elif(qpsk[i*100+1]==c_10[i*100+1]):
+        for j in range(200):
+            if(j<=99):
+                demodulated_bits.append(1)
+            else:
+                demodulated_bits.append(0)
+    elif(qpsk[i*100+1]==c_11[i*100+1]):
+        for j in range(200):
+            if(j<=99):
+                demodulated_bits.append(1)
+            else:
+                demodulated_bits.append(1)
+
+
+fig,axs=plt.subplots(7)
 axs[0].plot(t,interpolated_bits)
 axs[0].set_xlabel("time")
 axs[0].set_ylabel("bits")
@@ -64,8 +89,11 @@ axs[4].set_ylabel("c_11")
 
 axs[5].plot(t,qpsk)
 axs[5].set_xlabel("time")
-axs[5].set_ylabel("c_00")
+axs[5].set_ylabel("qpsk wave")
 
+axs[6].plot(t,demodulated_bits)
+axs[6].set_xlabel("time")
+axs[6].set_ylabel("demodulated wave")
 plt.show()
 
 
