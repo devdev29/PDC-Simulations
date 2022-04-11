@@ -66,7 +66,7 @@ for i in range(4):
                 demodulated_bits.append(1)
 
 
-fig,axs=plt.subplots(7)
+fig,axs=plt.subplots(6)
 axs[0].plot(t,interpolated_bits)
 axs[0].set_xlabel("time")
 axs[0].set_ylabel("bits")
@@ -91,9 +91,7 @@ axs[5].plot(t,qpsk)
 axs[5].set_xlabel("time")
 axs[5].set_ylabel("qpsk wave")
 
-axs[6].plot(t,demodulated_bits)
-axs[6].set_xlabel("time")
-axs[6].set_ylabel("demodulated wave")
+
 plt.show()
 
 
